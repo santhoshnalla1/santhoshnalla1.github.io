@@ -4,7 +4,6 @@ const GetInTouch = ({ heading, message, email }) => {
   // Split emails if multiple, and render only addresses as links
   const emailParts = email.split(/\s+/);
   const emails = emailParts.filter(e => e.includes('@'));
-  const nonEmails = emailParts.filter(e => !e.includes('@'));
 
   return (
     <>

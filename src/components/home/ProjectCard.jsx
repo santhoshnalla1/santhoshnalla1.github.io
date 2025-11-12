@@ -7,6 +7,7 @@ import axios from "axios";
 const ProjectCard = ({ value }) => {
   const {
     name,
+    role,
     description,
     svn_url,
     stargazers_count,
@@ -18,6 +19,9 @@ const ProjectCard = ({ value }) => {
       <Card className="card shadow-lg p-3 mb-5 bg-white rounded">
         <Card.Body>
           <Card.Title as="h5">{name || <Skeleton />} </Card.Title>
+          {role ? (
+            <Card.Subtitle className="mb-2 text-muted">{role}</Card.Subtitle>
+          ) : null}
           <Card.Text>{(!description) ? "" : description || <Skeleton count={3} />} </Card.Text>
           {svn_url ? <CardButtons svn_url={svn_url} /> : <Skeleton count={2} />}
           <hr />

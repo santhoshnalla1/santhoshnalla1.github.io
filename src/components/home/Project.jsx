@@ -4,6 +4,7 @@ import { Jumbotron } from "./migration";
 import Row from "react-bootstrap/Row";
 import ProjectCard from "./ProjectCard";
 import axios from "axios";
+import { customProjects } from "../../editable-stuff/config";
 
 const dummyProject = {
   name: null,
@@ -15,7 +16,7 @@ const dummyProject = {
 };
 const API = "https://api.github.com";
 // const gitHubQuery = "/repos?sort=updated&direction=desc";
-// const specficQuerry = "https://api.github.com/repos/hashirshoaeb/";
+// const specficQuerry = "https://api.github.com/repos/santhoshnalla1/";
 
 const Project = ({ heading, username, length, specfic }) => {
   const allReposAPI = `${API}/users/${username}/repos?sort=updated&direction=desc`;
@@ -33,6 +34,15 @@ const Project = ({ heading, username, length, specfic }) => {
       const response = await axios.get(allReposAPI);
       // slicing to the length
       repoList = [...response.data.slice(0, length)];
+      // remove undesired repos (e.g., moviesstore)
+      repoList = repoList.filter(r => r && r.name && r.name.toLowerCase() !== "moviesstore");
+      // ensure personal site repo appears first if it exists
+      const personalRepo = response.data.find(r => r && r.name && r.name.toLowerCase() === "santhoshnalla1.github.io");
+      if (personalRepo) {
+        // remove existing occurrence and add to front
+        repoList = repoList.filter(r => r && r.name && r.name.toLowerCase() !== "santhoshnalla1.github.io");
+        repoList.unshift(personalRepo);
+      }
       // adding specified repos
       try {
         for (let repoName of specfic) {
@@ -59,6 +69,23 @@ const Project = ({ heading, username, length, specfic }) => {
       <Container className="">
         <h2 className="display-4 pb-5 text-center">{heading}</h2>
         <Row>
+          {/* Render custom (private/group) projects first */}
+          {customProjects && customProjects.length > 0 && customProjects.map((project, index) => (
+            <ProjectCard
+              key={`custom-project-${index}`}
+              id={`custom-project-${index}`}
+              value={{
+                name: project.title,
+                role: project.role || null,
+                description: project.description + (project.note ? `\n${project.note}` : ""),
+                svn_url: project.demo || null,
+                stargazers_count: null,
+                languages_url: null,
+                pushed_at: null,
+              }}
+            />
+          ))}
+          {/* Then render public GitHub projects as before */}
           {projectsArray.length
             ? projectsArray.map((project, index) => (
               <ProjectCard

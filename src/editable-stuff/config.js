@@ -9,27 +9,19 @@ const mainBody = {
   firstName: "Santhosh",
   middleName: "",
   lastName: "Nalla",
-  message: "Computer Engineering major at Georgia Tech — passionate about building useful software.",
+  message: "Computer Engineering @ Georgia Tech | Current Subsystem Design and Integration Engineer @ EcoCAR",
   icons: [
     {
       image: "fa-github",
       url: "https://github.com/santhoshnalla1",
     },
     {
-      image: "fa-facebook",
-      url: "",
-    },
-    {
       image: "fa-instagram",
-      url: "",
+      url: "https://www.instagram.com/santhoshnallaa/",
     },
     {
       image: "fa-linkedin",
-      url: "",
-    },
-    {
-      image: "fa-twitter",
-      url: "",
+      url: "https://www.linkedin.com/in/santhosh-nalla-profile/",
     },
   ],
 };
@@ -41,7 +33,7 @@ const mainBody = {
 //b) a link to an hosted image
 //      i.e:profilePictureLink:"www.picturesonline.com/johnDoeFancyAvatar.jpg",
 //c) image in "editable-stuff" directory and use require("") to import here,
-//      i.e: profilePictureLink: require("../editable-stuff/hashirshoaeb.png"),
+//      i.e: profilePictureLink: require("../editable-stuff/profilepic.jpg"),
 //d) If you do not want any picture to be displayed, just leave it empty :)
 //      i.e: profilePictureLink: "",
 // For Resume either provide link to your resume or import from "editable-stuff" directory
@@ -51,11 +43,11 @@ const mainBody = {
 const about = {
   show: true,
   heading: "About Me",
-  imageLink: require("../editable-stuff/hashirshoaeb.png"),
+  imageLink: require("../editable-stuff/profilepic.jpg"),
   imageSize: 375,
   message:
-    "Hi — I'm Santhosh Nalla, a Computer Engineering major at Georgia Tech. I enjoy building practical software projects and learning systems and machine learning. This site showcases a selection of my projects and ways to get in touch.",
-  resume: "",
+    "Hi, I'm Santhosh Nalla, a Computer Engineering major at Georgia Tech. I enjoy building practical software projects and designing and modeling engineering projects. This site showcases a selection of my projects and ways to get in touch.",
+  resume: require("../editable-stuff/resumesanthosh.pdf"),
 };
 
 // PROJECTS SECTION
@@ -70,6 +62,31 @@ const repos = {
   reposLength: 4,
   specificRepos: [],
 };
+const customProjects = [
+  {
+    title: "EcoCAR Subsystem Integration",
+    role: "Subsystem Design & Integration Engineer",
+    description:
+      "Led subsystem design, modeling, and hardware-in-the-loop integration for the EcoCAR vehicle. Responsible for requirements breakdown, component selection, control strategy prototyping in Simulink, and coordinating tests between electrical, mechanical, and software teams. Delivered integration test plans, data-driven performance tuning, and supported final vehicle demonstrations to industry judges.",
+    demo: "",
+    note: "Private group project (unpublished repository). Details and code available on request."
+  },
+  {
+    title: "CareerConnect",
+    role: "Development Team",
+    description: "Short description of what you did and what the project achieved.",
+    demo: "",
+    note: "Private group repository. Details available on request."
+  },
+  {
+    title: "GTFoodTrucks",
+    role: "Development Team",
+    description: "Short description of what you did and what the project achieved.",
+    demo: "",
+    note: "Private group repository. Details available on request."
+  }
+  
+];
 
 // Leadership SECTION
 const leadership = {
@@ -79,12 +96,12 @@ const leadership = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae auctor eu augue ut lectus arcu bibendum at varius. Libero justo laoreet sit amet cursus sit amet. Imperdiet dui accumsan sit amet nulla facilisi morbi. At auctor urna nunc id. Iaculis urna id volutpat lacus laoreet non curabitur gravida. Et magnis dis parturient montes nascetur ridiculus mus mauris. In nisl nisi scelerisque eu ultrices vitae auctor. Mattis nunc sed blandit libero volutpat sed cras ornare. Pulvinar neque laoreet suspendisse interdum consectetur libero.",
   images: [
     { 
-      img: require("../editable-stuff/hashirshoaeb.png"), 
+  img: require("../editable-stuff/profilepic.jpg"), 
       label: "First slide label", 
       paragraph: "Nulla vitae elit libero, a pharetra augue mollis interdum." 
     },
     { 
-      img: require("../editable-stuff/hashirshoaeb.png"), 
+  img: require("../editable-stuff/profilepic.jpg"), 
       label: "Second slide label", 
       paragraph: "Nulla vitae elit libero, a pharetra augue mollis interdum." 
     },
@@ -100,24 +117,24 @@ const skills = {
   show: true,
   heading: "Skills",
   hardSkills: [
+    { name: "Systems Engineering", value: 88 },
+    { name: "MATLAB/Simulink", value: 86 },
+    { name: "Embedded C/C++", value: 80 },
+    { name: "Hardware Integration", value: 82 },
+    { name: "Control Systems", value: 80 },
     { name: "Python", value: 90 },
-    { name: "SQL", value: 75 },
-    { name: "Data Structures", value: 85 },
-    { name: "C/C++", value: 65 },
-    { name: "JavaScript", value: 90 },
-    { name: "React", value: 65 },
-    { name: "HTML/CSS", value: 55 },
-    { name: "C#", value: 80 },
+    { name: "Data Analysis", value: 78 },
+    { name: "CAN / Vehicle Networks", value: 72 },
   ],
   softSkills: [
-    { name: "Goal-Oriented", value: 80 },
-    { name: "Collaboration", value: 90 },
-    { name: "Positivity", value: 75 },
-    { name: "Adaptability", value: 85 },
-    { name: "Problem Solving", value: 75 },
-    { name: "Empathy", value: 90 },
-    { name: "Organization", value: 70 },
-    { name: "Creativity", value: 90 },
+    { name: "Team Collaboration", value: 92 },
+    { name: "Communication", value: 88 },
+    { name: "Leadership", value: 80 },
+    { name: "Problem Solving", value: 86 },
+    { name: "Adaptability", value: 84 },
+    { name: "Project Management", value: 78 },
+    { name: "Attention to Detail", value: 82 },
+    { name: "Creativity", value: 80 },
   ],
 };
 
@@ -125,9 +142,9 @@ const skills = {
 const getInTouch = {
   show: true,
   heading: "Get In Touch",
-  message:
-    "I'm currently looking for full-time Software Engineering or Machine Learning opportunities! If you know of any positions available, if you have any questions, or if you just want to say hi, please feel free to email me at",
-  email: "santhosh.nalla06@gmail.com",
+    message:
+      "I'm currently looking for Software Engineering opportunities for Summer 2026! If you know of any positions available, if you have any questions, or if you just want to say hi, please feel free to email me at",
+    email: "santhosh.nalla06@gmail.com",
 };
 
 const experiences = {
@@ -152,4 +169,4 @@ const experiences = {
 //   show: false,
 // };
 
-export { navBar, mainBody, about, repos, skills, leadership, getInTouch, experiences };
+export { navBar, mainBody, about, repos, skills, leadership, getInTouch, experiences, customProjects };

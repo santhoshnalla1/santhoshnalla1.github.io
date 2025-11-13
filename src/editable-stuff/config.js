@@ -100,6 +100,9 @@ const customProjects = [
 // Examples below use placeholder text and the sample image in editable-stuff.
 const projectDetails = {
   "chip-floorplanning-algorithm-visualizer": {
+    tech: ["React", "D3.js", "Algorithms"],
+    links: [],
+    // video: { youtube: "https://youtu.be/your-video-id" }
     sections: [
       {
         heading: "Highlights",
@@ -117,6 +120,8 @@ const projectDetails = {
     ]
   },
   "ecocar-false-floor": {
+    tech: ["Siemens NX", "Altair Inspire (FEA)", "Manufacturing"],
+    links: [],
     sections: [
       {
         heading: "Design Overview",
@@ -133,6 +138,9 @@ const projectDetails = {
     ]
   },
   "careerconnect": {
+    tech: ["React", "Node.js", "MongoDB"],
+    links: [],
+    // video: { src: require("../editable-stuff/careerconnect-demo.mp4"), poster: require("../editable-stuff/carconhomepage.png") }
     sections: [
       {
         heading: "Description",
@@ -155,6 +163,8 @@ const projectDetails = {
     ]
   },
   "gtfoodtrucks": {
+    tech: ["React", "Google Maps", "Google Calendar API"],
+    links: [],
     sections: [
       {
         heading: "Description",

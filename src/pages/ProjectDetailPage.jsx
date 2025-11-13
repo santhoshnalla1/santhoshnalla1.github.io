@@ -3,6 +3,10 @@ import { useLocation, useParams } from "react-router-dom";
 import { Jumbotron } from "../components/home/migration";
 import { mainBody, repos, customProjects, projectDetails } from "../editable-stuff/config";
 import axios from "axios";
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const ProjectDetailPage = () => {
   const location = useLocation();
@@ -10,6 +14,7 @@ const ProjectDetailPage = () => {
   const initialProject = location.state && location.state.project ? location.state.project : null;
   const [project, setProject] = React.useState(initialProject);
   const [loading, setLoading] = React.useState(!initialProject);
+  const [lightbox, setLightbox] = React.useState({ show: false, src: "", caption: "" });
 
   React.useEffect(() => {
     if (initialProject) return;
@@ -52,6 +57,9 @@ const ProjectDetailPage = () => {
   const isGithub = Boolean(project?.languages_url) || (repoUrl && repoUrl.includes("github.com"));
   const slug = (project?.name || params.slug || "project").toLowerCase().replace(/\s+/g, "-");
   const details = projectDetails && projectDetails[slug];
+  const tech = details?.tech || [];
+  const links = details?.links || [];
+  const video = details?.video;
 
   return (
     <main className="pt-0">
@@ -65,6 +73,37 @@ const ProjectDetailPage = () => {
       >
         <div className="container pt-5 pb-5">
           <h1 className="display-4 text-center mb-0 text-light">{title}</h1>
+        </div>
+      </section>
+
+      {/* Hero meta bar */}
+      <section className="bg-light">
+        <div className="container py-3">
+          <div className="d-flex flex-wrap justify-content-center gap-3">
+            {role && (
+              <Badge bg="secondary" className="px-3 py-2">
+                Role: {role}
+              </Badge>
+            )}
+            {Array.isArray(tech) &&
+              tech.map((t, i) => (
+                <Badge key={`tech-${i}`} bg="dark" className="px-3 py-2">
+                  {t}
+                </Badge>
+              ))}
+            {links &&
+              links.map((lnk, i) => (
+                <a
+                  key={`link-${i}`}
+                  href={lnk.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="btn btn-outline-dark btn-sm"
+                >
+                  {lnk.label}
+                </a>
+              ))}
+          </div>
         </div>
       </section>
 
@@ -89,6 +128,30 @@ const ProjectDetailPage = () => {
                   ))}
                 </section>
 
+                {/* Optional responsive video */}
+                {video && (
+                  <section className="mb-4">
+                    <h2 className="h5 text-uppercase text-muted mb-2">Video Demo</h2>
+                    <div className="ratio ratio-16x9">
+                      {video.youtube ? (
+                        <iframe
+                          src={video.youtube}
+                          title="Project video demo"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <video
+                          src={video.src}
+                          poster={video.poster}
+                          controls
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      )}
+                    </div>
+                  </section>
+                )}
+
                 {details && details.sections && details.sections.length > 0 && details.sections.map((section, index) => (
                   <section key={`detail-section-${index}`} className="mb-4">
                     {section.heading && (
@@ -104,7 +167,13 @@ const ProjectDetailPage = () => {
                           const caption = typeof img === "object" && img.caption ? img.caption : null;
                           return (
                             <div className="col-md-6 mb-3" key={`img-${i}`}>
-                              <img src={src} alt={caption || `project-image-${i}`} className="img-fluid rounded shadow-sm" />
+                              <img
+                                src={src}
+                                alt={caption || `project-image-${i}`}
+                                className="img-fluid rounded shadow-sm"
+                                style={{ cursor: "zoom-in" }}
+                                onClick={() => setLightbox({ show: true, src, caption: caption || "" })}
+                              />
                               {caption && <div className="text-muted small mt-2">{caption}</div>}
                             </div>
                           );
@@ -136,7 +205,61 @@ const ProjectDetailPage = () => {
               <p className="lead text-center">Project details not found.</p>
             )}
           </div>
+          {/* Sidebar quick facts */}
+          <div className="col-lg-4">
+            <div style={{ position: "sticky", top: 80 }}>
+              <Card className="mb-4 shadow-sm">
+                <Card.Body>
+                  <Card.Title as="h6" className="text-uppercase text-muted">Quick Facts</Card.Title>
+                  {role && (
+                    <p className="mb-2"><strong>Role:</strong> {role}</p>
+                  )}
+                  {Array.isArray(tech) && tech.length > 0 && (
+                    <div className="mb-2">
+                      <strong>Tech:</strong>
+                      <div className="mt-2 d-flex flex-wrap gap-2">
+                        {tech.map((t, i) => (
+                          <Badge bg="secondary" key={`tech-side-${i}`}>{t}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {(isGithub || repoUrl || (links && links.length)) && (
+                    <div className="mt-3 d-flex flex-wrap gap-2">
+                      {isGithub && repoUrl && (
+                        <a href={repoUrl} target="_blank" rel="noreferrer noopener" className="btn btn-outline-dark btn-sm">
+                          GitHub
+                        </a>
+                      )}
+                      {!isGithub && repoUrl && (
+                        <a href={repoUrl} target="_blank" rel="noreferrer noopener" className="btn btn-outline-dark btn-sm">
+                          Project Link
+                        </a>
+                      )}
+                      {links && links.map((lnk, i) => (
+                        <a key={`sidelink-${i}`} href={lnk.href} target="_blank" rel="noreferrer noopener" className="btn btn-outline-dark btn-sm">
+                          {lnk.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </div>
+          </div>
         </div>
+
+        {/* Lightbox modal */}
+        <Modal show={lightbox.show} onHide={() => setLightbox({ show: false, src: "", caption: "" })} centered size="lg">
+          <Modal.Body className="p-0">
+            {lightbox.src && (
+              <img src={lightbox.src} alt={lightbox.caption || "project-image"} className="img-fluid w-100" />
+            )}
+          </Modal.Body>
+          {lightbox.caption && (
+            <div className="px-3 py-2 text-muted small">{lightbox.caption}</div>
+          )}
+        </Modal>
       </Jumbotron>
     </main>
   );

@@ -230,7 +230,7 @@ const ProjectDetailPage = () => {
                     </>
                   )}
 
-                  {(isGithub || repoUrl || (links && links.length)) && (
+                  {(isGithub || !!repoUrl || (Array.isArray(links) && links.length > 0)) && (
                     <div className="mt-3 d-flex flex-wrap gap-2">
                       {isGithub && repoUrl && (
                         <a href={repoUrl} target="_blank" rel="noreferrer noopener" className="btn btn-outline-dark btn-sm">

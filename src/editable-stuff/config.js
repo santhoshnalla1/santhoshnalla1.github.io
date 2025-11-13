@@ -9,7 +9,7 @@ const mainBody = {
   firstName: "Santhosh",
   middleName: "",
   lastName: "Nalla",
-  message: "Computer Engineering @ Georgia Tech | Current Subsystem Design and Integration Engineer @ EcoCAR",
+  message: "Computer Engineering @ Georgia Tech",
   icons: [
     {
       image: "fa-github",
@@ -103,6 +103,10 @@ const projectDetails = {
     tech: ["React", "D3.js", "Algorithms"],
     links: [],
     // video: { youtube: "https://youtu.be/your-video-id" }
+    atAGlance: [
+      "Solo project focusing on algorithm visualization",
+      "Interactive UI with animated placement/routing steps"
+    ],
     sections: [
       {
         heading: "Highlights",
@@ -120,8 +124,12 @@ const projectDetails = {
     ]
   },
   "ecocar-false-floor": {
-    tech: ["Siemens NX", "Altair Inspire (FEA)", "Manufacturing"],
+    tech: ["Siemens NX", "Altair Inspire", "CAD"],
     links: [],
+    atAGlance: [
+      "Validated with FEA before fabrication",
+      "Led CAD-to-fabrication handoff and build steps"
+    ],
     sections: [
       {
         heading: "Design Overview",
@@ -138,9 +146,13 @@ const projectDetails = {
     ]
   },
   "careerconnect": {
-    tech: ["React", "Node.js", "MongoDB"],
+    tech: ["Django", "Python", "Jira"],
     links: [],
     // video: { src: require("../editable-stuff/careerconnect-demo.mp4"), poster: require("../editable-stuff/carconhomepage.png") }
+    atAGlance: [
+      "3 user roles: Job Seeker, Recruiter, Admin",
+      "Features: profiles, job posts, search, applications"
+    ],
     sections: [
       {
         heading: "Description",
@@ -163,8 +175,12 @@ const projectDetails = {
     ]
   },
   "gtfoodtrucks": {
-    tech: ["React", "Google Maps", "Google Calendar API"],
+    tech: ["Sprint", "Google Maps API", "Django"],
     links: [],
+    atAGlance: [
+      "Vendors manage daily schedules and menus",
+      "Students see live truck locations and get directions"
+    ],
     sections: [
       {
         heading: "Description",

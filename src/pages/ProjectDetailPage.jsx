@@ -114,13 +114,6 @@ const ProjectDetailPage = () => {
               <p className="lead text-center">Loading...</p>
             ) : project ? (
               <>
-                {role && (
-                  <section className="mb-4">
-                    <h2 className="h5 text-uppercase text-muted mb-2">Role</h2>
-                    <p className="lead mb-0">{role}</p>
-                  </section>
-                )}
-
                 <section className="mb-4">
                   <h2 className="h5 text-uppercase text-muted mb-2">Overview</h2>
                   {description.split("\n").map((para, idx) => (
@@ -152,8 +145,11 @@ const ProjectDetailPage = () => {
                   </section>
                 )}
 
-                {details && details.sections && details.sections.length > 0 && details.sections.map((section, index) => (
-                  <section key={`detail-section-${index}`} className="mb-4">
+                {details && details.sections && details.sections.length > 0 && details.sections.map((section, index) => {
+                  const headingText = section.heading || `Section ${index + 1}`;
+                  const anchorId = headingText.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+                  return (
+                  <section id={anchorId} key={`detail-section-${index}`} className="mb-4">
                     {section.heading && (
                       <h2 className="h5 text-uppercase text-muted mb-2">{section.heading}</h2>
                     )}
@@ -181,7 +177,7 @@ const ProjectDetailPage = () => {
                       </div>
                     )}
                   </section>
-                ))}
+                )})}
 
                 {(isGithub || repoUrl) && (
                   <section className="mb-2">
@@ -210,20 +206,30 @@ const ProjectDetailPage = () => {
             <div style={{ position: "sticky", top: 80 }}>
               <Card className="mb-4 shadow-sm">
                 <Card.Body>
-                  <Card.Title as="h6" className="text-uppercase text-muted">Quick Facts</Card.Title>
-                  {role && (
-                    <p className="mb-2"><strong>Role:</strong> {role}</p>
-                  )}
-                  {Array.isArray(tech) && tech.length > 0 && (
-                    <div className="mb-2">
-                      <strong>Tech:</strong>
-                      <div className="mt-2 d-flex flex-wrap gap-2">
-                        {tech.map((t, i) => (
-                          <Badge bg="secondary" key={`tech-side-${i}`}>{t}</Badge>
+                  <Card.Title as="h6" className="text-uppercase text-muted">On this page</Card.Title>
+                  <ul className="mb-3">
+                    {details?.sections?.map((s, i) => {
+                      const text = s.heading || `Section ${i + 1}`;
+                      const anchorId = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+                      return (
+                        <li key={`toc-${i}`} className="mb-1">
+                          <a href={`#${anchorId}`} className="text-decoration-none">{text}</a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  {Array.isArray(details?.atAGlance) && details.atAGlance.length > 0 && (
+                    <>
+                      <Card.Title as="h6" className="text-uppercase text-muted mt-3">At a glance</Card.Title>
+                      <ul className="mb-3">
+                        {details.atAGlance.map((item, i) => (
+                          <li key={`glance-${i}`}>{item}</li>
                         ))}
-                      </div>
-                    </div>
+                      </ul>
+                    </>
                   )}
+
                   {(isGithub || repoUrl || (links && links.length)) && (
                     <div className="mt-3 d-flex flex-wrap gap-2">
                       {isGithub && repoUrl && (

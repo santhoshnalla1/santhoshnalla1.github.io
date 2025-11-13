@@ -13,8 +13,6 @@ const ProjectCard = ({ value, isMasonry }) => {
     stargazers_count,
     languages_url,
     pushed_at,
-    custom,
-    raw,
   } = value;
 
   const navigate = useNavigate();

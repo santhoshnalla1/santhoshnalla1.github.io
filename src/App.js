@@ -42,7 +42,7 @@ const Home = React.forwardRef((props, ref) => {
     };
 
     tryScroll(0);
-  }, [location]);
+  }, [location.hash]);
   return (
     <>
       <MainBody

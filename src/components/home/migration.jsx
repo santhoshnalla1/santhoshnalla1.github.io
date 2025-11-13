@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
 export const Jumbotron = (props) => {
   const bgStyle = props.style ?? { backgroundColor: "#e9ecef" };
@@ -13,14 +14,20 @@ export const Jumbotron = (props) => {
 }
 
 export const NavLink = (props) => {
+  const { to, href, target, rel, className, children, onClick } = props;
+  const linkProps = to
+    ? { as: Link, to }
+    : { href };
+
   return (
     <Nav.Link
-      href={props.href}
-      target={props.target}
-      rel={props.rel}
+      {...linkProps}
+      target={target}
+      rel={rel}
+      onClick={onClick}
     >
-      <span className={`nav-item lead ${props.className}`}>
-        {props.children}
+      <span className={`nav-item lead ${className}`}>
+        {children}
       </span>
     </Nav.Link>
   );

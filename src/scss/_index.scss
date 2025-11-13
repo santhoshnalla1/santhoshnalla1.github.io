@@ -109,6 +109,19 @@ code {
     transition: transform 0.3s, box-shadow 0.3s;
   }
 }
+.masonry {
+  column-count: 1;
+  column-gap: 1.5rem;
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+}
+.masonry-item {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
 .skills-tabs {
   flex-grow: 1;
 }

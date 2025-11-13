@@ -59,34 +59,124 @@ const repos = {
   show: true,
   heading: "Recent Projects",
   gitHubUsername: "santhoshnalla1", // your GitHub username
-  reposLength: 4,
+  reposLength: 0,
   specificRepos: [],
 };
 const customProjects = [
   {
-    title: "EcoCAR Subsystem Integration",
+    title: "Chip Floorplanning Algorithm Visualizer",
+    role: "Solo Project",
+    description: "Work in progress",
+    demo: "",
+    note: ""
+  },
+  {
+    title: "EcoCAR False Floor",
     role: "Subsystem Design & Integration Engineer",
     description:
-      "Led subsystem design, modeling, and hardware-in-the-loop integration for the EcoCAR vehicle. Responsible for requirements breakdown, component selection, control strategy prototyping in Simulink, and coordinating tests between electrical, mechanical, and software teams. Delivered integration test plans, data-driven performance tuning, and supported final vehicle demonstrations to industry judges.",
+      "I designed and modeled a custom false floor using Siemens NX and then validated its structural integrity using Finite Element Analysis (FEA). I also led the hands-on fabrication of the floor and designed sound insulation panels to address vehicle noise and vibration.",
     demo: "",
-    note: "Private group project (unpublished repository). Details and code available on request."
+    note: ""
   },
   {
     title: "CareerConnect",
     role: "Development Team",
-    description: "Short description of what you did and what the project achieved.",
+    description: "This website allows recruiters to connect with job seekers and vice versa based on their skills and experience.",
     demo: "",
-    note: "Private group repository. Details available on request."
+    note: ""
   },
   {
     title: "GTFoodTrucks",
     role: "Development Team",
-    description: "Short description of what you did and what the project achieved.",
+    description: "This app allows people to view which food truck vendors are coming to the GT campus today and where they'll be.",
     demo: "",
-    note: "Private group repository. Details available on request."
+    note: ""
   }
   
 ];
+
+// PROJECT DETAIL CONTENT
+// Add rich content (text + images) for each project by slug (lowercase, spaces -> hyphens)
+// Examples below use placeholder text and the sample image in editable-stuff.
+const projectDetails = {
+  "chip-floorplanning-algorithm-visualizer": {
+    sections: [
+      {
+        heading: "Highlights",
+        paragraphs: [
+          "Add an overview and results for this project.",
+          "Mention the algorithms and data structures used"
+        ]
+      },
+      {
+        heading: "Gallery",
+        images: [
+          
+        ]
+      }
+    ]
+  },
+  "ecocar-false-floor": {
+    sections: [
+      {
+        heading: "Design Overview",
+        paragraphs: [
+          "Led subsystem design, modeling, and hardware-in-the-loop integration for the EcoCAR vehicle. Responsible for requirements breakdown, component selection, control strategy prototyping in Simulink, and coordinating tests between electrical, mechanical, and software teams. Delivered integration test plans, data-driven performance tuning, and supported final vehicle demonstrations to industry judges."
+        ]
+      },
+      {
+        heading: "False Floor FEA Results",
+        images: [
+          { src: require("../editable-stuff/falsefloorfea.png") }
+        ]
+      }
+    ]
+  },
+  "careerconnect": {
+    sections: [
+      {
+        heading: "Description",
+        paragraphs: [
+          "CareerConnect connects job seekers with recruiters through three user types: Job Seekers create profiles with skills and experience, Recruiters post jobs and search candidates, and Administrators manage the platform. The system includes profile management, job posting, application tracking, and search functionality."
+        ]
+      },
+      {
+        heading: "Home Page",
+        images: [
+          { src: require("../editable-stuff/carconhomepage.png") }
+        ]
+      },
+      {
+        heading: "Video Demo",
+        images: [
+          { src: require("../editable-stuff/carconhomepage.png") }
+        ]
+      }
+    ]
+  },
+  "gtfoodtrucks": {
+    sections: [
+      {
+        heading: "Description",
+        paragraphs: [
+          "GtFoodTrucks connects campus food truck vendors and students through two main user types: Vendors and Students, with an Admin role to oversee operations. Vendors can log in to post, edit, and manage their daily schedules, menus, and campus locations using an interactive map. Students can view which food trucks are currently on campus, see their menus, and get directions to their locations. The system integrates Google Maps for navigation and Google Calendar for managing and displaying vendor schedules."
+        ]
+      },
+      {
+        heading: "Home Page",
+        images: [
+          { src: require("../editable-stuff/gtfoodtruckshomepage.png") }
+        ]
+      },
+      {
+        heading: "Video Demo",
+        images: [
+          { src: require("../editable-stuff/gtfoodtruckshomepage.png") }
+        ]
+      },
+    ]
+  }
+};
 
 // Leadership SECTION
 const leadership = {
@@ -169,4 +259,4 @@ const experiences = {
 //   show: false,
 // };
 
-export { navBar, mainBody, about, repos, skills, leadership, getInTouch, experiences, customProjects };
+export { navBar, mainBody, about, repos, skills, leadership, getInTouch, experiences, customProjects, projectDetails };

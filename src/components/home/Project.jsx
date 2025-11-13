@@ -34,15 +34,27 @@ const Project = ({ heading, username, length, specfic }) => {
       const response = await axios.get(allReposAPI);
       // slicing to the length
       repoList = [...response.data.slice(0, length)];
-      // remove undesired repos (e.g., moviesstore)
-      repoList = repoList.filter(r => r && r.name && r.name.toLowerCase() !== "moviesstore");
-      // ensure personal site repo appears first if it exists
-      const personalRepo = response.data.find(r => r && r.name && r.name.toLowerCase() === "santhoshnalla1.github.io");
-      if (personalRepo) {
-        // remove existing occurrence and add to front
-        repoList = repoList.filter(r => r && r.name && r.name.toLowerCase() !== "santhoshnalla1.github.io");
-        repoList.unshift(personalRepo);
-      }
+      // remove undesired repos
+      // - moviesstore (example)
+      // - personal site repo (santhoshnalla1.github.io) per user preference
+      repoList = repoList.filter(
+        (r) =>
+          r &&
+          r.name &&
+          r.name.toLowerCase() !== "moviesstore" &&
+          r.name.toLowerCase() !== "santhoshnalla1.github.io"
+      );
+      // NOTE: Previously we promoted the personal site repo to the front; keeping this
+      // commented out so it can be re-enabled later if desired.
+      // const personalRepo = response.data.find(
+      //   (r) => r && r.name && r.name.toLowerCase() === "santhoshnalla1.github.io"
+      // );
+      // if (personalRepo) {
+      //   repoList = repoList.filter(
+      //     (r) => r && r.name && r.name.toLowerCase() !== "santhoshnalla1.github.io"
+      //   );
+      //   repoList.unshift(personalRepo);
+      // }
       // adding specified repos
       try {
         for (let repoName of specfic) {
@@ -68,7 +80,7 @@ const Project = ({ heading, username, length, specfic }) => {
     <Jumbotron fluid id="projects" className="bg-light m-0">
       <Container className="">
         <h2 className="display-4 pb-5 text-center">{heading}</h2>
-        <Row>
+        <div className="masonry">
           {/* Render custom (private/group) projects first */}
           {customProjects && customProjects.length > 0 && customProjects.map((project, index) => (
             <ProjectCard
@@ -82,7 +94,10 @@ const Project = ({ heading, username, length, specfic }) => {
                 stargazers_count: null,
                 languages_url: null,
                 pushed_at: null,
+                custom: true,
+                raw: project,
               }}
+              isMasonry
             />
           ))}
           {/* Then render public GitHub projects as before */}
@@ -92,6 +107,7 @@ const Project = ({ heading, username, length, specfic }) => {
                 key={`project-card-${index}`}
                 id={`project-card-${index}`}
                 value={project}
+                isMasonry
               />
             ))
             : dummyProjectsArr.map((project, index) => (
@@ -99,9 +115,10 @@ const Project = ({ heading, username, length, specfic }) => {
                 key={`dummy-${index}`}
                 id={`dummy-${index}`}
                 value={project}
+                isMasonry
               />
             ))}
-        </Row>
+        </div>
       </Container>
     </Jumbotron>
   );

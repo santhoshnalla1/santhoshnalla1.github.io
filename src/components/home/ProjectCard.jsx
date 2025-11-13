@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Skeleton from "react-loading-skeleton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const ProjectCard = ({ value }) => {
+const ProjectCard = ({ value, isMasonry }) => {
   const {
     name,
     role,
@@ -13,31 +13,44 @@ const ProjectCard = ({ value }) => {
     stargazers_count,
     languages_url,
     pushed_at,
+    custom,
+    raw,
   } = value;
+
+  const navigate = useNavigate();
+  const isGithub = Boolean(languages_url) || (svn_url && svn_url.includes("github.com"));
+  const slug = name ? name.toLowerCase().replace(/\s+/g, "-") : "";
+
+  const handleOpen = () => {
+    if (!name || isGithub) return;
+    navigate(`/projects/${slug}`, { state: { project: value } });
+  };
+
   return (
-    <Col md={6}>
-      <Card className="card shadow-lg p-3 mb-5 bg-white rounded">
+    <div className={isMasonry ? "masonry-item" : "col-md-6"}>
+      <Card
+        className="card shadow-lg p-3 mb-5 bg-white rounded"
+        role={!isGithub && name ? "button" : undefined}
+        onClick={!isGithub ? handleOpen : undefined}
+        style={{ cursor: !isGithub && name ? "pointer" : "default" }}
+      >
         <Card.Body>
           <Card.Title as="h5">{name || <Skeleton />} </Card.Title>
           {role ? (
             <Card.Subtitle className="mb-2 text-muted">{role}</Card.Subtitle>
           ) : null}
           <Card.Text>{(!description) ? "" : description || <Skeleton count={3} />} </Card.Text>
-          {svn_url ? <CardButtons svn_url={svn_url} /> : <Skeleton count={2} />}
-          <hr />
-          {languages_url ? (
+          {isGithub ? <CardButtons svn_url={svn_url} /> : null}
+          {isGithub ? <hr /> : null}
+          {isGithub ? (
             <Language languages_url={languages_url} repo_url={svn_url} />
-          ) : (
-            <Skeleton count={3} />
-          )}
-          {value ? (
+          ) : null}
+          {isGithub ? (
             <CardFooter star_count={stargazers_count} repo_url={svn_url} pushed_at={pushed_at} />
-          ) : (
-            <Skeleton />
-          )}
+          ) : null}
         </Card.Body>
       </Card>
-    </Col>
+    </div>
   );
 };
 

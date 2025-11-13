@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { mainBody, repos, about, skills } from "../editable-stuff/config.js";
 import { NavLink } from "./home/migration";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = React.forwardRef((props, ref) => {
   // const { showBlog, FirstName } = config;
@@ -16,20 +17,39 @@ const Navigation = React.forwardRef((props, ref) => {
   useScrollPosition(
     ({ prevPos, currPos }) => {
       if (!navbarDimensions) return;
-      currPos.y + ref.current.offsetTop - navbarDimensions.bottom > 5
-        ? setIsTop(true)
-        : setIsTop(false);
+      if (!ref?.current) {
+        // When no anchor ref is provided (non-home pages), rely on window scroll
+        setIsTop(currPos.y <= 5);
+      } else {
+        currPos.y + ref.current.offsetTop - navbarDimensions.bottom > 5
+          ? setIsTop(true)
+          : setIsTop(false);
+      }
       setScrollPosition(currPos.y);
     },
-    [navBottom]
+    [navBottom],
+    undefined,
+    true
   );
 
   React.useEffect(() => {
     if (!navbarDimensions) return;
-    navBottom - scrollPosition >= ref.current.offsetTop
-      ? setIsTop(false)
-      : setIsTop(true);
+    if (!ref?.current) {
+      setIsTop(scrollPosition <= 5);
+    } else {
+      navBottom - scrollPosition >= ref.current.offsetTop
+        ? setIsTop(false)
+        : setIsTop(true);
+    }
   }, [navBottom, navbarDimensions, ref, scrollPosition]);
+
+  const location = useLocation();
+
+  const scrollTopIfSameRoute = (targetPath) => (e) => {
+    if (location && location.pathname === targetPath) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <Navbar
@@ -38,7 +58,12 @@ const Navigation = React.forwardRef((props, ref) => {
         }`}
       expand="lg"
     >
-      <Navbar.Brand className="navbar-brand" href={process.env.PUBLIC_URL + "/#home"}>
+      <Navbar.Brand
+        className="navbar-brand"
+        as={Link}
+        to="/"
+        onClick={scrollTopIfSameRoute("/")}
+      >
         {`<${mainBody.firstName} />`}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
@@ -52,7 +77,7 @@ const Navigation = React.forwardRef((props, ref) => {
           {repos.show && (
 
             <NavLink
-              href={process.env.PUBLIC_URL + "/#projects"}
+              to={{ pathname: "/", hash: "#projects" }}
             >
               Projects
             </NavLink>
@@ -68,7 +93,8 @@ const Navigation = React.forwardRef((props, ref) => {
           {about.show && (
             <NavLink
               className="nav-item lead"
-              href={process.env.PUBLIC_URL + "/#aboutme"}
+              to="/about"
+              onClick={scrollTopIfSameRoute("/about")}
             >
               About
             </NavLink>
@@ -76,7 +102,7 @@ const Navigation = React.forwardRef((props, ref) => {
           {skills.show && (
             <NavLink
               className="nav-item lead"
-              href={process.env.PUBLIC_URL + "/#skills"}
+              to={{ pathname: "/", hash: "#skills" }}
             >
               Skills
             </NavLink>

@@ -5,7 +5,6 @@ import { mainBody, repos, customProjects, projectDetails } from "../editable-stu
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const ProjectDetailPage = () => {

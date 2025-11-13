@@ -100,7 +100,7 @@ const ScrollManager = () => {
     // Skip auto-scroll for in-page anchors we handle (projects/skills)
     if (location.hash === "#projects" || location.hash === "#skills") return;
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location.pathname, location.search, location.key]);
+  }, [location.pathname, location.search, location.key, location.hash]);
   return null;
 };
 

@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Skeleton from "react-loading-skeleton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { projectDetails } from "../../editable-stuff/config";
 
 const ProjectCard = ({ value, isMasonry }) => {
   const {
@@ -18,6 +19,11 @@ const ProjectCard = ({ value, isMasonry }) => {
   const navigate = useNavigate();
   const isGithub = Boolean(languages_url) || (svn_url && svn_url.includes("github.com"));
   const slug = name ? name.toLowerCase().replace(/\s+/g, "-") : "";
+  const isCustom = Boolean(value.custom);
+  const customTech =
+    isCustom && slug && projectDetails && projectDetails[slug] && Array.isArray(projectDetails[slug].tech)
+      ? projectDetails[slug].tech
+      : [];
 
   const handleOpen = () => {
     if (!name || isGithub) return;
@@ -37,7 +43,19 @@ const ProjectCard = ({ value, isMasonry }) => {
           {role ? (
             <Card.Subtitle className="mb-2 text-muted">{role}</Card.Subtitle>
           ) : null}
-          <Card.Text>{(!description) ? "" : description || <Skeleton count={3} />} </Card.Text>
+          <Card.Text className="mb-2">{(!description) ? "" : description || <Skeleton count={3} />} </Card.Text>
+
+          {/* Custom project tech badges under description */}
+          {isCustom && customTech && customTech.length > 0 ? (
+            <div className="mt-2 mb-2">
+              {customTech.map((t) => (
+                <span key={t} className="badge bg-light text-dark me-2 mb-2">
+                  {t}
+                </span>
+              ))}
+            </div>
+          ) : null}
+
           {isGithub ? <CardButtons svn_url={svn_url} /> : null}
           {isGithub ? <hr /> : null}
           {isGithub ? (

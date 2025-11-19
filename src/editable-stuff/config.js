@@ -45,8 +45,11 @@ const about = {
   heading: "About Me",
   imageLink: require("../editable-stuff/profilepic.jpg"),
   imageSize: 375,
-  message:
-    "Hi, I'm Santhosh Nalla, a Computer Engineering major at Georgia Tech. I enjoy building practical software projects and designing and modeling engineering projects. This site showcases a selection of my projects and ways to get in touch.",
+  message: [
+    "I am a Engineering student at Georgia Institute of Technology with a 3.92 GPA and a concentration in Distributed System & Software Design and Systems & Architecture. I am passionate about applying my knowledge at the intersection of complex software development and hands-on systems integration.",
+    "Currently, as a Subsystem Design and Integration Engineer for the Georgia Tech EcoCAR EV Challenge, I am gaining direct experience in the full engineering lifecycle. I design and model custom components in Siemens NX, validate structural integrity using Finite Element Analysis (FEA) to meet strict safety standards, and lead the hands-on fabrication of these parts.",
+    "My engineering work is complemented by a strong background in software development. During my internship at STEMPOWERed, I worked in an Agile environment to redesign the website's frontend. I personally developed and deployed new UI components using JavaScript and CSS, contributing to a 20-point improvement in performance metrics and a 15% reduction in page load time. My contributions were part of a collaborative GitHub workflow that resulted in a 95% on-time feature delivery rate.",
+  ],
   resume: require("../editable-stuff/resumesanthosh.pdf"),
 };
 
@@ -66,7 +69,7 @@ const customProjects = [
   {
     title: "Chip Floorplanning Algorithm Visualizer",
     role: "Solo Project",
-    description: "Work in progress",
+    description: "Interactive visualizer for VLSI floorplanning that steps through placement and routing, compares heuristics, and tracks area, wirelength, and overlap metrics.",
     demo: "",
     note: ""
   },
@@ -74,21 +77,21 @@ const customProjects = [
     title: "EcoCAR False Floor",
     role: "Subsystem Design & Integration Engineer",
     description:
-      "I designed and modeled a custom false floor using Siemens NX and then validated its structural integrity using Finite Element Analysis (FEA). I also led the hands-on fabrication of the floor and designed sound insulation panels to address vehicle noise and vibration.",
+      "Lightweight serviceable false floor modeled in Siemens NX and validated with FEA; led shop fabrication and added NVH insulation to meet EcoCAR safety and packaging constraints.",
     demo: "",
     note: ""
   },
   {
     title: "CareerConnect",
-    role: "Development Team",
-    description: "This website allows recruiters to connect with job seekers and vice versa based on their skills and experience.",
+    role: "Full-stack/ Development Team",
+    description: "Recruiting platform with Job Seeker, Recruiter, and Admin roles, profiles, job posts, candidate search, and application tracking with permissioned workflows.",
     demo: "",
     note: ""
   },
   {
     title: "GTFoodTrucks",
-    role: "Development Team",
-    description: "This app allows people to view which food truck vendors are coming to the GT campus today and where they'll be.",
+    role: "Full-stack/ Development Team",
+    description: "Campus food truck finder where vendors publish schedules/menus and students see live locations, menus, and directions via Google Maps and Calendar.",
     demo: "",
     note: ""
   }
@@ -100,27 +103,74 @@ const customProjects = [
 // Examples below use placeholder text and the sample image in editable-stuff.
 const projectDetails = {
   "chip-floorplanning-algorithm-visualizer": {
-    tech: ["React", "D3.js", "Algorithms"],
+    tech: ["React", "Python", "Algorithms"],
     links: [],
-    // video: { youtube: "https://youtu.be/your-video-id" }
+    video: { src: require("../editable-stuff/cfavRecording.mp4") },
     atAGlance: [
-      "Solo project focusing on algorithm visualization",
-      "Interactive UI with animated placement/routing steps"
+      "5x5 grid with 12 blocks (A–L)",
+      "Objective: minimize total HPWL across nets",
+      "Simulated Annealing with cooling schedule",
+      "Live visualization of placement and cost over time",
+      "Tracks and reports best solution found"
     ],
     sections: [
       {
-        heading: "Highlights",
+        heading: "What this app does",
         paragraphs: [
-          "Add an overview and results for this project.",
-          "Mention the algorithms and data structures used"
+          "It’s a live visualizer of a chip floorplanning optimizer. We place 12 logic blocks on a 5x5 grid and try to minimize total wiring cost between connected blocks.",
+          "It uses Simulated Annealing (SA), a metaheuristic that explores many layouts, occasionally accepting worse ones to escape local minima.",
+          "The visualization shows colored blocks and dashed lines indicating net connections while the cost improves over time."
         ]
       },
       {
-        heading: "Gallery",
-        images: [
-          
+        heading: "Key concepts",
+        paragraphs: [
+          "Grid (5x5): Simplified chip area where each cell can hold at most one block.",
+          "Blocks (A–L): Modules that must be placed on the grid (e.g., cores, caches, IP blocks).",
+          "Netlist: Which blocks must connect (e.g., n1: [A, B, F]). Each net implies wires between those blocks.",
+          "HPWL (Half-Perimeter Wire Length): For a net, take the bounding box around its blocks; HPWL is (width + height). Total cost is the sum across nets. Lower is better.",
+          "Simulated Annealing: Starts hot (explores freely), cools down (becomes choosier). Accepts better moves always; accepts worse moves with probability exp(-Δ/T) to avoid getting stuck."
         ]
-      }
+      },
+      {
+        heading: "How the algorithm works (step-by-step)",
+        paragraphs: [
+          "Initialize: Randomly shuffle blocks and empties onto the 5x5 grid.",
+          "Evaluate: Compute total HPWL from the current placement.",
+          "Propose move: Swap two random grid cells (block↔block, block↔empty, or empty↔empty).",
+          "Accept/Reject: If cost improves, accept. If worse, maybe accept based on temperature T.",
+          "Cool: Multiply T by ALPHA each outer loop.",
+          "Track best: Keep the best layout seen.",
+          "Visualize: Every few iterations, update the plot.",
+          "Finish: Show the final best placement and cost."
+        ]
+      },
+      {
+        heading: "What the UI demonstrates",
+        paragraphs: [
+          "Colored blocks A–L placed on a grid.",
+          "Dashed lines per net radiating from the net’s centroid to its member blocks (helps intuit connection clustering).",
+          "Title shows iteration, temperature, current cost, and best cost as they improve."
+        ]
+      },
+      {
+        heading: "Why this matters (real-world uses)",
+        paragraphs: [
+          "Chip design (EDA): Floorplanning is a critical early step; good placements reduce wire length, delay, and power.",
+          "Optimization education: Clear, minimal example of simulated annealing with an industry-relevant cost function (HPWL).",
+          "Rapid prototyping: Easy to tweak nets, sizes, and parameters to study behavior and trade-offs."
+        ]
+      },
+      {
+        heading: "Limitations and extensions",
+        paragraphs: [
+          "Uniform cells, no block sizes/orientations. Extension: add block sizes, non-overlap constraints, fixed macros, and keep-outs.",
+          "Simple neighbor move (random swap). Extension: smarter moves (regional swaps, single-block moves, rip-up-and-place).",
+          "HPWL only (no congestion/timing/power). Extension: multi-objective cost with weights, congestion/timing estimators.",
+          "Centroid lines visualize nets; not real routing. Extension: Steiner-tree approximations or congestion heatmaps.",
+          "Fixed SA schedule. Extension: adaptive cooling, reheating, or hybrid with genetic/tabu search."
+        ]
+      },
     ]
   },
   "ecocar-false-floor": {
@@ -166,12 +216,7 @@ const projectDetails = {
           { src: require("../editable-stuff/carconhomepage.png") }
         ]
       },
-      {
-        heading: "Video Demo",
-        images: [
-          { src: require("../editable-stuff/carconhomepage.png") }
-        ]
-      }
+
     ]
   },
   "gtfoodtrucks": {
@@ -194,12 +239,7 @@ const projectDetails = {
           { src: require("../editable-stuff/gtfoodtruckshomepage.png") }
         ]
       },
-      {
-        heading: "Video Demo",
-        images: [
-          { src: require("../editable-stuff/gtfoodtruckshomepage.png") }
-        ]
-      },
+
     ]
   }
 };
@@ -233,24 +273,24 @@ const skills = {
   show: true,
   heading: "Skills",
   hardSkills: [
-    { name: "Systems Engineering", value: 88 },
-    { name: "MATLAB/Simulink", value: 86 },
-    { name: "Embedded C/C++", value: 80 },
-    { name: "Hardware Integration", value: 82 },
-    { name: "Control Systems", value: 80 },
+    { name: "Java", value: 85 },
     { name: "Python", value: 90 },
-    { name: "Data Analysis", value: 78 },
-    { name: "CAN / Vehicle Networks", value: 72 },
+    { name: "C++", value: 80 },
+    { name: "JavaScript", value: 85 },
+    { name: "React", value: 82 },
+    { name: "Node.js", value: 78 },
+    { name: "SQL / MySQL", value: 80 },
+    { name: "HTML / CSS", value: 84 },
   ],
   softSkills: [
+    { name: "Agile / Scrum", value: 85 },
+    { name: "Sprint Planning", value: 82 },
+    { name: "Code Reviews", value: 84 },
     { name: "Team Collaboration", value: 92 },
     { name: "Communication", value: 88 },
-    { name: "Leadership", value: 80 },
     { name: "Problem Solving", value: 86 },
     { name: "Adaptability", value: 84 },
-    { name: "Project Management", value: 78 },
     { name: "Attention to Detail", value: 82 },
-    { name: "Creativity", value: 80 },
   ],
 };
 

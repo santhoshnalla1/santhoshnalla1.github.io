@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "/static/css/main.57805948.css",
-    "main.js": "/static/js/main.1d9e22f9.js",
+    "main.js": "/static/js/main.6802bd95.js",
     "static/js/453.5cd421d3.chunk.js": "/static/js/453.5cd421d3.chunk.js",
+    "static/media/cfavRecording.mp4": "/static/media/cfavRecording.99d5c7cefe608e5ec8d9.mp4",
     "static/media/falsefloorfea.png": "/static/media/falsefloorfea.9a1106317ba48aed05f0.png",
     "static/media/carconhomepage.png": "/static/media/carconhomepage.81db4cda96fd7f842c84.png",
     "static/media/gtfoodtruckshomepage.png": "/static/media/gtfoodtruckshomepage.3696cb04e29b5b00d787.png",
@@ -10,11 +11,11 @@
     "static/media/profilepic.jpg": "/static/media/profilepic.88e6a9cd66f2cadc7137.jpg",
     "index.html": "/index.html",
     "main.57805948.css.map": "/static/css/main.57805948.css.map",
-    "main.1d9e22f9.js.map": "/static/js/main.1d9e22f9.js.map",
+    "main.6802bd95.js.map": "/static/js/main.6802bd95.js.map",
     "453.5cd421d3.chunk.js.map": "/static/js/453.5cd421d3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.57805948.css",
-    "static/js/main.1d9e22f9.js"
+    "static/js/main.6802bd95.js"
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8f610555.css",
+    "main.js": "/static/js/main.a04f8e02.js",
+    "static/js/453.5cd421d3.chunk.js": "/static/js/453.5cd421d3.chunk.js",
+    "static/media/cfavRecording.mp4": "/static/media/cfavRecording.99d5c7cefe608e5ec8d9.mp4",
+    "static/media/falsefloorfea.png": "/static/media/falsefloorfea.9a1106317ba48aed05f0.png",
+    "static/media/gtfoodtruckshomepage.png": "/static/media/gtfoodtruckshomepage.3696cb04e29b5b00d787.png",
+    "static/media/resumesanthosh.pdf": "/static/media/resumesanthosh.7c5104c6df85bfe46ed8.pdf",
+    "static/media/profilepic.jpg": "/static/media/profilepic.88e6a9cd66f2cadc7137.jpg",
+    "index.html": "/index.html",
+    "main.8f610555.css.map": "/static/css/main.8f610555.css.map",
+    "main.a04f8e02.js.map": "/static/js/main.a04f8e02.js.map",
+    "453.5cd421d3.chunk.js.map": "/static/js/453.5cd421d3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f610555.css",
+    "static/js/main.a04f8e02.js"
+  ]
+}

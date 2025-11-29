@@ -5,7 +5,7 @@ const navBar = {
 
 // Main Body SECTION
 const mainBody = {
-  gradientColors: "#4484ce, #1ad7c0, #ff9b11, #9b59b6, #ff7f7f, #ecf0f1",
+  gradientColors: "#4484ce, #1ad7c0, #ff9b11, #9b59b6, #ff7f7f",
   firstName: "Santhosh",
   middleName: "",
   lastName: "Nalla",
@@ -14,10 +14,6 @@ const mainBody = {
     {
       image: "fa-github",
       url: "https://github.com/santhoshnalla1",
-    },
-    {
-      image: "fa-instagram",
-      url: "https://www.instagram.com/santhoshnallaa/",
     },
     {
       image: "fa-linkedin",
@@ -46,9 +42,7 @@ const about = {
   imageLink: require("../editable-stuff/profilepic.jpg"),
   imageSize: 375,
   message: [
-    "I am a Engineering student at Georgia Institute of Technology with a 3.92 GPA and a concentration in Distributed System & Software Design and Systems & Architecture. I am passionate about applying my knowledge at the intersection of complex software development and hands-on systems integration.",
-    "Currently, as a Subsystem Design and Integration Engineer for the Georgia Tech EcoCAR EV Challenge, I am gaining direct experience in the full engineering lifecycle. I design and model custom components in Siemens NX, validate structural integrity using Finite Element Analysis (FEA) to meet strict safety standards, and lead the hands-on fabrication of these parts.",
-    "My engineering work is complemented by a strong background in software development. During my internship at STEMPOWERed, I worked in an Agile environment to redesign the website's frontend. I personally developed and deployed new UI components using JavaScript and CSS, contributing to a 20-point improvement in performance metrics and a 15% reduction in page load time. My contributions were part of a collaborative GitHub workflow that resulted in a 95% on-time feature delivery rate.",
+    "Hello, I am an undergraduate student who is passionate about applying my knowledge at the intersection of complex software development and hands-on systems integration.",
   ],
   resume: require("../editable-stuff/resumesanthosh.pdf"),
 };
@@ -118,7 +112,7 @@ const projectDetails = {
         heading: "What this app does",
         paragraphs: [
           "It’s a live visualizer of a chip floorplanning optimizer. We place 12 logic blocks on a 5x5 grid and try to minimize total wiring cost between connected blocks.",
-          "It uses Simulated Annealing (SA), a metaheuristic that explores many layouts, occasionally accepting worse ones to escape local minima.",
+          "It uses Simulated Annealing, a metaheuristic that explores many layouts, occasionally accepting worse ones to escape local minima.",
           "The visualization shows colored blocks and dashed lines indicating net connections while the cost improves over time."
         ]
       },
@@ -198,7 +192,7 @@ const projectDetails = {
   "careerconnect": {
     tech: ["Django", "Python", "Jira"],
     links: [],
-    // video: { src: require("../editable-stuff/careerconnect-demo.mp4"), poster: require("../editable-stuff/carconhomepage.png") }
+    video: { youtube: "https://www.youtube.com/embed/kToOqDQ2B_8" },
     atAGlance: [
       "3 user roles: Job Seeker, Recruiter, Admin",
       "Features: profiles, job posts, search, applications"
@@ -210,13 +204,7 @@ const projectDetails = {
           "CareerConnect connects job seekers with recruiters through three user types: Job Seekers create profiles with skills and experience, Recruiters post jobs and search candidates, and Administrators manage the platform. The system includes profile management, job posting, application tracking, and search functionality."
         ]
       },
-      {
-        heading: "Home Page",
-        images: [
-          { src: require("../editable-stuff/carconhomepage.png") }
-        ]
-      },
-
+      
     ]
   },
   "gtfoodtrucks": {
@@ -270,7 +258,7 @@ const leadership = {
 
 // SKILLS SECTION
 const skills = {
-  show: true,
+  show: false,
   heading: "Skills",
   hardSkills: [
     { name: "Java", value: 85 },

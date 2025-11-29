@@ -11,7 +11,6 @@ import {
   experiences
 } from "./editable-stuff/config.js";
 import MainBody from "./components/home/MainBody";
-import AboutMe from "./components/home/AboutMe";
 import Project from "./components/home/Project";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -24,6 +23,19 @@ import AboutPage from "./pages/AboutPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
 
 import Experience from "./components/home/Experience";
+
+const RoutesWithFade = () => {
+  const location = useLocation();
+  return (
+    <div key={`${location.pathname}${location.search}${location.hash}`} className="page-fade">
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+      </Routes>
+    </div>
+  );
+};
 
 const Home = React.forwardRef((props, ref) => {
   const location = useLocation();
@@ -52,15 +64,7 @@ const Home = React.forwardRef((props, ref) => {
         icons={mainBody.icons}
         ref={ref}
       />
-      {about.show && (
-        <AboutMe
-          heading={about.heading}
-          message={about.message}
-          link={about.imageLink}
-          imgSize={about.imageSize}
-          resume={about.resume}
-        />
-      )}
+      {/* AboutMe section removed from home; content merged into hero */}
       {
         experiences.show && (
           <Experience experiences={experiences}/>
@@ -111,11 +115,7 @@ const App = () => {
     <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
       {navBar.show && <Navbar ref={titleRef} />}
       <ScrollManager />
-      <Routes>
-        <Route path="/" exact element={<Home ref={titleRef} />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-      </Routes>
+      <RoutesWithFade />
       {/* {false && <Route path="/blog" exact component={Blog} />}
       {false && <Route path="/blog/:id" component={BlogPost} />} */}
       <Footer>

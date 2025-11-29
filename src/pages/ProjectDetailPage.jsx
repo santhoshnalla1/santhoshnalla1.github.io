@@ -76,7 +76,7 @@ const ProjectDetailPage = () => {
       </section>
 
       {/* Hero meta bar */}
-      <section className="bg-light">
+      <section className="bg-contrast">
         <div className="container py-3">
           <div className="d-flex flex-wrap justify-content-center gap-3">
             {role && (
@@ -120,8 +120,8 @@ const ProjectDetailPage = () => {
                   ))}
                 </section>
 
-                {/* Optional responsive video */}
-                {video && (
+                {/* Optional responsive video; if there's a 'Description' section, render after it instead */}
+                {video && !(details?.sections || []).some(s => (s.heading || "").trim().toLowerCase() === "description") && (
                   <section className="mb-4">
                     <h2 className="h5 text-uppercase text-muted mb-2">Video Demo</h2>
                     <div className="ratio ratio-16x9">
@@ -173,6 +173,30 @@ const ProjectDetailPage = () => {
                             </div>
                           );
                         })}
+                      </div>
+                    )}
+
+                    {/* If this is the Description section and a video exists, show the video right below */}
+                    {(section.heading || "").trim().toLowerCase() === "description" && video && (
+                      <div className="mt-3">
+                        <h2 className="h5 text-uppercase text-muted mb-2">Video Demo</h2>
+                        <div className="ratio ratio-16x9">
+                          {video.youtube ? (
+                            <iframe
+                              src={video.youtube}
+                              title="Project video demo"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                            />
+                          ) : (
+                            <video
+                              src={video.src}
+                              poster={video.poster}
+                              controls
+                              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            />
+                          )}
+                        </div>
                       </div>
                     )}
                   </section>

@@ -58,38 +58,22 @@ const Navigation = React.forwardRef((props, ref) => {
         }`}
       expand="lg"
     >
-      <Navbar.Brand
-        className="navbar-brand"
-        as={Link}
-        to="/"
-        onClick={scrollTopIfSameRoute("/")}
-      >
+      <Navbar.Brand className="navbar-brand">
         {`<${mainBody.firstName} />`}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="navbar-nav mr-auto">
-          {/* {
-            <NavLink className="nav-item lead">
-              <Link to={process.env.PUBLIC_URL + "/blog"}>Blog</Link>
-            </NavLink>
-          } */}
-          {repos.show && (
-
-            <NavLink
-              to={{ pathname: "/", hash: "#projects" }}
-            >
-              Projects
-            </NavLink>
-          )}
+          {/* Home */}
           <NavLink
             className="nav-item lead"
-            href={about.resume}
-            target="_blank"
-            rel="noreferrer noopener"
+            to="/"
+            onClick={scrollTopIfSameRoute("/")}
           >
-            Resume
+            Home
           </NavLink>
+
+          {/* About */}
           {about.show && (
             <NavLink
               className="nav-item lead"
@@ -99,14 +83,23 @@ const Navigation = React.forwardRef((props, ref) => {
               About
             </NavLink>
           )}
-          {skills.show && (
-            <NavLink
-              className="nav-item lead"
-              to={{ pathname: "/", hash: "#skills" }}
-            >
-              Skills
+
+          {/* Projects */}
+          {repos.show && (
+            <NavLink to={{ pathname: "/", hash: "#projects" }}>
+              Projects
             </NavLink>
           )}
+
+          {/* Resume */}
+          <NavLink
+            className="nav-item lead"
+            href={about.resume}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Resume
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -33,7 +33,7 @@ const ProjectCard = ({ value, isMasonry }) => {
   return (
     <div className={isMasonry ? "masonry-item" : "col-md-6"}>
       <Card
-        className="card shadow-lg p-3 mb-5 bg-white rounded"
+        className="card shadow-lg p-3 mb-5 rounded"
         role={!isGithub && name ? "button" : undefined}
         onClick={!isGithub ? handleOpen : undefined}
         style={{ cursor: !isGithub && name ? "pointer" : "default" }}
@@ -49,7 +49,7 @@ const ProjectCard = ({ value, isMasonry }) => {
           {isCustom && customTech && customTech.length > 0 ? (
             <div className="mt-2 mb-2">
               {customTech.map((t) => (
-                <span key={t} className="badge bg-light text-dark me-2 mb-2">
+                <span key={t} className="badge bg-secondary me-2 mb-2">
                   {t}
                 </span>
               ))}
@@ -121,7 +121,7 @@ const Language = ({ languages_url, repo_url }) => {
             target=" _blank"
             rel="noopener noreferrer"
           >
-            <span className="badge bg-light text-dark">
+            <span className="badge bg-secondary">
               {language}:{" "}
               {Math.trunc((data[language] / total_count) * 1000) / 10} %
             </span>
@@ -162,11 +162,11 @@ const CardFooter = ({ star_count, repo_url, pushed_at }) => {
       <a
         href={repo_url + "/stargazers"}
         target=" _blank"
-        className="text-dark text-decoration-none"
+        className="text-light text-decoration-none"
       >
-        <span className="text-dark card-link mr-4">
+        <span className="text-light card-link mr-4">
           <i className="fab fa-github" /> Stars{" "}
-          <span className="badge badge-dark">{star_count}</span>
+          <span className="badge bg-dark">{star_count}</span>
         </span>
       </a>
       <small className="text-muted">Updated {updated_at}</small>

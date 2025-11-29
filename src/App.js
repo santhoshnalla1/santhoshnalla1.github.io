@@ -1,28 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import {
-  navBar,
-  mainBody,
-  about,
-  repos,
-  leadership,
-  skills,
-  getInTouch,
-  experiences
-} from "./editable-stuff/config.js";
+import { navBar, mainBody, repos, getInTouch } from "./editable-stuff/config.js";
 import MainBody from "./components/home/MainBody";
 import Project from "./components/home/Project";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import Skills from "./components/home/Skills";
-// import { Blog } from "./components/blog/Blog";
-// import BlogPost from "./components/blog/BlogPost";
 import GetInTouch from "./components/home/GetInTouch.jsx";
-import Leadership from "./components/home/Leadership.jsx";
 import AboutPage from "./pages/AboutPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
-
-import Experience from "./components/home/Experience";
 
 const RoutesWithFade = () => {
   const location = useLocation();
@@ -64,33 +49,12 @@ const Home = React.forwardRef((props, ref) => {
         icons={mainBody.icons}
         ref={ref}
       />
-      {/* AboutMe section removed from home; content merged into hero */}
-      {
-        experiences.show && (
-          <Experience experiences={experiences}/>
-        )
-      }
       {repos.show && (
         <Project
           heading={repos.heading}
           username={repos.gitHubUsername}
           length={repos.reposLength}
           specfic={repos.specificRepos}
-        />
-      )}
-      {leadership.show && (
-        <Leadership
-          heading={leadership.heading}
-          message={leadership.message}
-          img={leadership.images}
-          imageSize={leadership.imageSize}
-        />
-      )}
-      {skills.show && (
-        <Skills
-          heading={skills.heading}
-          hardSkills={skills.hardSkills}
-          softSkills={skills.softSkills}
         />
       )}
       
@@ -101,8 +65,7 @@ const Home = React.forwardRef((props, ref) => {
 const ScrollManager = () => {
   const location = useLocation();
   React.useEffect(() => {
-    // Skip auto-scroll for in-page anchors we handle (projects/skills)
-    if (location.hash === "#projects" || location.hash === "#skills") return;
+    if (location.hash === "#projects") return;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname, location.search, location.key, location.hash]);
   return null;
@@ -116,8 +79,6 @@ const App = () => {
       {navBar.show && <Navbar ref={titleRef} />}
       <ScrollManager />
       <RoutesWithFade />
-      {/* {false && <Route path="/blog" exact component={Blog} />}
-      {false && <Route path="/blog/:id" component={BlogPost} />} */}
       <Footer>
         {getInTouch.show && (
           <GetInTouch

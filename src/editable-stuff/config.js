@@ -287,7 +287,7 @@ const getInTouch = {
   show: true,
   heading: "Get In Touch",
     message:
-      "I'm currently looking for Software Engineering opportunities for Summer 2026! If you know of any positions available, if you have any questions, or if you just want to say hi, please feel free to email me at",
+      "I am actively seeking Software Engineering opportunities for Summer 2026! Whether you have a role in mind, a question about my work, or simply want to connect, I’d love to hear from you. Please reach out to me at",
     email: "santhosh.nalla06@gmail.com",
 };
 

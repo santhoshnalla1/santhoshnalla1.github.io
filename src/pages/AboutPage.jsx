@@ -37,13 +37,13 @@ const AboutPage = () => {
                       <span className="fw-semibold">Degree:</span> B.S. in Computer Engineering
                     </li>
                     <li className="mb-1">
-                      <span className="fw-semibold">Expected Graduation:</span> May 2027
+                      <span className="fw-semibold">Expected Graduation:</span> May 2028
                     </li>
                     <li>
                       <span className="fw-semibold">Concentration:</span> Distributed Systems & Software Design and Systems & Architecture
                     </li>
                     <li>
-                      <span className="fw-semibold">GPA:</span> 3.9/4.0
+                      <span className="fw-semibold">GPA:</span> 3.6/4.0
                     </li>
                   </ul>
                 </Card.Body>
@@ -56,6 +56,26 @@ const AboutPage = () => {
             <h2 className="h2 mb-4 text-center">Relevant Courses</h2>
             <Row className="g-4">
               {[
+                {
+                  title: "Design of Operating Systems",
+                  code: "CS 3210",
+                  description: "Evaluated core operating system concepts, including multi-threading, CPU scheduling, synchronization, inter-process communication, and access control. Designed and implemented various low-level operating system components to optimize resource management and system performance."
+                },
+                {
+                  title: "Processor Design",
+                  code: "CS 3220",
+                  description: "Engineered hardware implementations of processor architecture by designing pipelined structures using Verilog on Field-Programmable Gate Array (FPGA) boards. Analyzed digital system performance by evaluating timing issues, critical paths, and underlying hardware configurations to maximize processing efficiency."
+                },
+                {
+                  title: "Intro to Software Engineering",
+                  code: "CS 3300",
+                  description: "Collaborated in a team-based project environment to apply core software engineering principles and industry-standard practices. Managed the complete software development lifecycle from architectural planning to implementation to build scalable and maintainable applications."
+                },
+                {
+                  title: "Computer Networking I",
+                  code: "CS 3251",
+                  description: "Analyzed fundamental computer networking problems, including error recovery, medium access, routing, flow control, and transport protocols. Designed and implemented networked applications to evaluate network behavior, performance, and architecture."
+                },
                 {
                   title: "Design and Analysis of Algorithms",
                   code: "CS 3510",
